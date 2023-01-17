@@ -1,0 +1,21 @@
+const localKey = {
+    USER_ID: 'userId',
+    ROLE_ID: 'roleID',
+    EMAIL: 'email',
+    USER_NAME: 'userName',
+    LOGIN_TOKEN: 'LOGIN_TOKEN',
+    ALL_LANGUAGES: 'ALL_LANGUAGES',
+    ALL_COUNTRIES: 'ALL_COUNTRIES',
+    ALL_ROLES: 'ALL_ROLES',
+    USER_LANGUAGE: 'USER_LANGUAGE',
+    USER_COUNTRY: 'USER_COUNTRY',
+    USER_ROLE: 'USER_ROLE',
+    REG_ADD: 'REG_ADD',
+    MASTER: 'MASTER',
+    SELECTED_SELLER: 'SELECTED_SELLER',
+    SELECTED_DELIVERY: 'SELECTED_DELIVERY',
+    DEVICE_TOKEN: 'DEVICE_TOKEN',
+  };
+  
+  export default localKey;
+  
