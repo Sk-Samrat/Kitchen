@@ -94,12 +94,27 @@ const EditStackNavigator = () => {
 }
 
 const SignUpStackNavigator = () => {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dummyFoodItemData.map(item => {
+      dispatch(addMyProducts(item))
+    })
+    dummyData.map(item => {
+      dispatch(addMyOffer(item))
+    })
+  }, [])
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="SignUp" component={SignIn} />
       <Stack.Screen name="Home" component={RightDrawerScreen} />
       <Stack.Screen name="EditProfile" component={EditDetails} />
       <Stack.Screen name="FavouriteItems" component={Favourites} />
+      <Stack.Screen name="FoodItem" component={FoodItem} />
+      <Stack.Screen name="FoodItemDetails" component={FoodItemDetails} />
+      <Stack.Screen name="OfferItem" component={Offer} />
+      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="PopularFood" component={PopularFood} />
     </Stack.Navigator>
   );
 }

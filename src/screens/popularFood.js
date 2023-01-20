@@ -6,10 +6,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { dummyFoodItemData } from "../../data/data";
 import { images } from "../../data/data";
 import { useSelector } from "react-redux";
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const widthCategory = Dimensions.get('window').width / 3 - 20;
 const heightHomeUpperContent = Dimensions.get('window').height / 14;
 const widthPopular = Dimensions.get('window').width / 2 - 30;
+
+const heightScreen = Dimensions.get('window').height;
+const widthScreen = Dimensions.get('window').width;
 
 const PopularFood = ({ route, navigation }) => {
 
@@ -32,6 +40,8 @@ const PopularFood = ({ route, navigation }) => {
     useEffect(() => {
         // dispatch(getTotals());
         console.log('category: ', foodCategory);
+        console.log('width: ', widthScreen);
+        console.log('height: ', heightScreen);
         // setFilteredDataSource(myProducts);
         // setFoodCategory();
         onPressHandler();
@@ -91,7 +101,10 @@ const PopularFood = ({ route, navigation }) => {
                 <View style={styles.cardPopular}>
                     <View
                         style={{
-                            height: 100,
+                            // height: heightScreen / 4,
+                            // height: 350,
+                            flex: 1,
+                            // height: responsiveHeight(15),
                             alignItems: 'center',
                             flexDirection: 'row'
                         }}>
@@ -103,15 +116,15 @@ const PopularFood = ({ route, navigation }) => {
                             style={styles.iconPopular}
                         //style={{ flex: 1, resizeMode: 'contain' }}
                         />
-                        <View style={{ top: -50, }}>
-                            <Icon name="heart-outline" size={15} color='#694fad' />
+                        <View style={{ alignSelf: 'flex-start' }}>
+                            <Icon name="heart-outline" size={responsiveWidth(5)} color='#694fad' />
                         </View>
                     </View>
                     <View style={{ alignItems: 'center', }}>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 15, color: colors.black, }}>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 17, color: colors.black, }}>
                             {item.product_name}
                         </Text>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 15, color: colors.black, }}>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 17, color: colors.black, }}>
                             {'\u20B9'}{item.product_price}
                         </Text>
                     </View>
@@ -165,7 +178,7 @@ const styles = StyleSheet.create({
     },
     categoryContainer: {
         flexDirection: 'row',
-        marginTop: 20,
+        //marginTop: 20,
         // marginBottom: 0,
         justifyContent: 'space-between',
         // backgroundColor: 'red'
@@ -173,6 +186,7 @@ const styles = StyleSheet.create({
         //paddingHorizontal: 20,
         //marginLeft: 10,
         //flex: 1,
+        alignSelf: 'flex-end'
     },
     categoryText: {
         fontSize: 17,
@@ -192,9 +206,12 @@ const styles = StyleSheet.create({
         // marginHorizontal: 20,
     },
     cardPopular: {
-        height: 170,
+        // height: 170,
+        //flex: 1,
+        height: responsiveHeight(30),
+        width: responsiveWidth(40),
         backgroundColor: colors.white,
-        width: widthPopular,
+        //width: widthPopular,
         marginVertical: 5,
         borderRadius: 5,
         // borderBottomEndRadius: 50,

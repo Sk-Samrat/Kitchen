@@ -26,7 +26,7 @@ function CartItemsContainer() {
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item, index }) => (
         <View style={styles.cartItem}>
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Image
               style={styles.cartItemImg}
               //source={{uri: 'http://140.238.246.162/media/20220720-153940.png'}}
@@ -50,7 +50,7 @@ function CartItemsContainer() {
                   if (item.itemQuantity === 1) {
                     // console.log('item', item);
                     dispatch(removeFromCart(item));
-                    
+
                     return;
                   }
                   dispatch(decreaseCart(item));

@@ -10,10 +10,16 @@ import {
     ScrollView,
     FlatList,
     Image,
-    ActivityIndicator
+    ActivityIndicator,
+    PixelRatio
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Voice from '@react-native-community/voice';
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 import Header from "../common/components/headerBar";
 import colors from "../common/components/colors";
@@ -24,10 +30,17 @@ import { dummyFoodItemData } from "../../data/data";
 import { images } from "../../data/data";
 
 const heightHomeUpperContent = Dimensions.get('window').height / 5;
+const heightCard = Dimensions.get('window').height;
 
 const width = Dimensions.get('window').width / 3 - 50;
+const totalWidth = Dimensions.get('window').width;
 
 const widthPopular = Dimensions.get('window').width / 2 - 60;
+const heightPopular = Dimensions.get('window').height / 8;
+
+const widthPopularSize = PixelRatio.getPixelSizeForLayoutSize(widthPopular);
+
+const heightPopularSize = PixelRatio.getPixelSizeForLayoutSize(heightCard);
 
 let apidata = [{
     product_name: 'Food',
@@ -111,35 +124,43 @@ const Home = ({ navigation }) => {
         }
     }, [])
 
+    useEffect(() => {
+        console.log("Height :", heightCard);
+        console.log("Total Width :", totalWidth);
+        console.log("WidthPopular :", widthPopular);
+        console.log("widthPopularSize :", widthPopularSize);
+        console.log("heightPopularSize :", heightPopularSize);
+    }, [])
+
     const onSpeechStartHandler = (e) => {
-        console.log("start handler==>>>", e)
+        console.log("start handler==>>>", e);
     }
     const onSpeechEndHandler = (e) => {
         setLoading(false)
-        console.log("stop handler", e)
+        console.log("stop handler", e);
     }
 
     const onSpeechResultsHandler = (e) => {
-        let text = e.value[0]
-        setResult(text)
-        console.log("speech result handler", e)
+        let text = e.value[0];
+        setResult(text);
+        console.log("speech result handler", e);
     }
 
     const startRecording = async () => {
-        setLoading(true)
+        setLoading(true);
         try {
-            await Voice.start('en-Us')
+            await Voice.start('en-Us');
         } catch (error) {
-            console.log("error raised", error)
+            console.log("error raised", error);
         }
     }
 
     const stopRecording = async () => {
-        setLoading(false)
+        setLoading(false);
         try {
-            await Voice.stop()
+            await Voice.stop();
         } catch (error) {
-            console.log("error raised", error)
+            console.log("error raised", error);
         }
     }
 
@@ -159,7 +180,9 @@ const Home = ({ navigation }) => {
                 <View style={styles.card}>
                     <View
                         style={{
-                            height: 80,
+                            // height: 80,
+                            // height: heightCard / 15,
+                            height:responsiveHeight(8),
                             alignItems: 'center',
                         }}>
                         <Image
@@ -182,7 +205,7 @@ const Home = ({ navigation }) => {
                         alignItems: 'center',
                         padding: 5,
                     }}>
-                    <Text style={{ fontFamily: 'Roboto-Regular', fontSize: 15, color: colors.black, }}>
+                    <Text style={{ fontFamily: 'Roboto-Regular', fontSize: responsiveFontSize(2), color: colors.black, }}>
                         {item.product_name}
                     </Text>
                 </View>
@@ -203,27 +226,35 @@ const Home = ({ navigation }) => {
                 <View style={styles.cardPopular}>
                     <View
                         style={{
-                            height: 100,
+                            // height: 300,
+                            // height: heightCard / 6,
+                            flex: 1,
+                            // height: heightPopularSize,
+                            // height: responsiveHeight(15),
                             alignItems: 'center',
-                            flexDirection: 'row'
+                            flexDirection: 'row',
+                            // backgroundColor: colors.badRed,
+                            justifyContent:'center',
+                            alignItems:'center'
                         }}>
                         <Image
                             //source={{uri: 'http://140.238.246.162/media/20220720-153940.png'}}
                             // source={{ uri: `http://140.238.246.162/${item.main_image}` }}
                             // source={require('../assets/images/food-1.png')}
                             source={images.imageObject[item.product_code]}
-                            style={styles.iconPopular}
-                        //style={{ flex: 1, resizeMode: 'contain' }}
+                            //resizeMode='contain'
+                            // style={styles.iconPopular}
+                            style={{ flex: 1, resizeMode: 'contain'}}
                         />
-                        <View style={{ top: -50, }}>
-                            <Icon name="heart-outline" size={15} color='#694fad' />
+                        <View style={{ alignSelf: 'flex-start' }}>
+                            <Icon name="heart-outline" size={responsiveWidth(5)} color='#694fad' />
                         </View>
                     </View>
                     <View style={{ alignItems: 'center', }}>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 15, color: colors.black, }}>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(1.5), color: colors.black, }}>
                             {item.product_name}
                         </Text>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 15, color: colors.black, }}>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(1.5), color: colors.black, }}>
                             {'\u20B9'}{item.product_price}
                         </Text>
                     </View>
@@ -237,30 +268,30 @@ const Home = ({ navigation }) => {
             <Header title="Home"
                 onPressMenu={() => navigation.getParent('LeftDrawer').openDrawer()}
             />
-            <View style={{ flex: 1, }}>
-                <View style={{ height: heightHomeUpperContent, marginHorizontal: 20, }}>
+            <View style={{ flex: 1 }}>
+                <View style={{ height:responsiveHeight(21) ,marginHorizontal: 20, }}>
                     <View style={{ flexDirection: 'row', }}>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black }}>Hi </Text>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black }}>Samrat,</Text>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(2.5), color: colors.black }}>Hi </Text>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(2.5), color: colors.black }}>Samrat,</Text>
                         <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                             <TouchableOpacity
                                 activeOpacity={0.5}
-                                onPress={()=>{navigation.getParent('RightDrawer').openDrawer();}}
+                                onPress={() => { navigation.getParent('RightDrawer').openDrawer(); }}
                             >
-                                <Icon name="person-circle-sharp" size={30} color={colors.darkGrey} />
+                                <Icon name="person-circle-sharp" size={responsiveWidth(7)} color={colors.darkGrey} />
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={{ marginVertical: 5, }}>
+                    <View style={{ marginVertical: 5 }}>
                         <Text
-                            style={{ fontFamily: 'DynaPuff-SemiBold', fontSize: 25, }}
+                            style={{ fontFamily: 'DynaPuff-SemiBold', fontSize: responsiveFontSize(3), }}
                         >
                             What would you like to <Text style={{ color: colors.violet }}>eat</Text> today?
                         </Text>
                     </View>
-                    <View style={{ flexDirection: 'row', }}>
+                    <View style={{ flexDirection: 'row', marginTop: 10 }}>
                         <View style={styles.searchContainer}>
-                            <Icon name="search-outline" size={25} style={{ marginLeft: 10 }} />
+                            <Icon name="search-outline" size={responsiveWidth(6)} style={{ marginLeft: 10 }} />
                             {/* <FontAwesomeIcon icon="fa-thin fa-magnifying-glass" size={25} style={{ marginLeft: 20 }}/> */}
                             <TextInput
                                 style={styles.input}
@@ -274,7 +305,7 @@ const Home = ({ navigation }) => {
                                     // style={{backgroundColor:'red',alignItems:'center',justifyContent:'center'}}
                                     onPress={startRecording}
                                 >
-                                    <Icon name="mic-outline" size={25} style={{ marginRight: 20 }} />
+                                    <Icon name="mic-outline" size={responsiveWidth(6)} style={{ marginRight: 20 }} />
                                 </TouchableOpacity>)}
                         </View>
                         <View style={styles.sortBtn}>
@@ -282,12 +313,12 @@ const Home = ({ navigation }) => {
                                 activeOpacity={0.8}
                                 onPress={stopRecording}
                             >
-                                <Icon name="filter-outline" size={25} color={colors.white} />
+                                <Icon name="filter-outline" size={responsiveWidth(6)} color={colors.white} />
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
-                <View style={{ flex: 1, backgroundColor: colors.smoke, }}>
+                <View style={{ flex: 3, backgroundColor: colors.smoke }}>
                     <ScrollView >
                         <View style={{ flex: 1, marginBottom: 10, marginHorizontal: 20, }}>
                             <FlatList
@@ -310,7 +341,7 @@ const Home = ({ navigation }) => {
                             />
                         </View>
                         <View>
-                            <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black, marginHorizontal: 20, }}>Today's Special Offer</Text>
+                            <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(2.5), color: colors.black, marginHorizontal: 20, }}>Today's Special Offer</Text>
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 // onPress={() => navigation.navigate('OfferItem')}
@@ -326,12 +357,12 @@ const Home = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black, marginHorizontal: 20, }}>Popular Now</Text>
+                            <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(2.5), color: colors.black, marginHorizontal: 20, }}>Popular Now</Text>
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 onPress={() => navigation.navigate('PopularFood')}
                             >
-                                <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 17, color: colors.violet, marginHorizontal: 20, }}>See Full Menu</Text>
+                                <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(2), color: colors.violet, marginHorizontal: 20, }}>See Full Menu</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ marginBottom: 10, marginHorizontal: 20, }}>
@@ -373,7 +404,7 @@ const styles = StyleSheet.create({
         shadowColor: colors.black,
     },
     input: {
-        fontSize: 15,
+        fontSize: responsiveWidth(3.5),
         fontWeight: 'bold',
         flex: 1,
         color: colors.black,
@@ -393,7 +424,8 @@ const styles = StyleSheet.create({
     card: {
         //height: 225,
         backgroundColor: colors.white,
-        width,
+        // width: totalWidth / 5,
+        width: responsiveWidth(25),
         marginHorizontal: 5,
         borderRadius: 30,
         // borderBottomEndRadius: 50,
@@ -408,13 +440,17 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        width,
+        //width,
+        width: responsiveWidth(20),
         resizeMode: "contain",
     },
     cardPopular: {
-        height: 160,
+        // height: 160,
+        // flex: 1,
+        height: responsiveHeight(30),
         backgroundColor: colors.white,
-        width: widthPopular,
+        // width: widthPopular,
+        width: responsiveWidth(40),
         marginHorizontal: 5,
         borderRadius: 5,
         // borderBottomEndRadius: 50,
@@ -426,11 +462,17 @@ const styles = StyleSheet.create({
         padding: 15,
         // shadowColor: colors.black,
         elevation: 10,
+        // alignItems:'center',
+        // justifyContent:'center'
     },
     iconPopular: {
         flex: 1,
-        width: widthPopular,
+        // width: widthPopular,
+        // width:responsiveWidth(20),
+        // width: responsiveWidth(100),
+        // height:responsiveHeight(100),
         resizeMode: "contain",
+        backgroundColor: colors.goodGreen
     },
 });
 

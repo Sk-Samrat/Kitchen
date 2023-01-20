@@ -59,7 +59,7 @@ const FoodItemDetails = ({ route, navigation }) => {
     // alert(itemQuantity);
     dispatch(decreaseQty(item.product_code));
     // if (item.product_quantity === 1) {
-      if (itemQuantity === 1) {
+    if (itemQuantity === 1) {
       dispatch(removeFromCartItem(item));
       return;
     }
@@ -141,7 +141,7 @@ const FoodItemDetails = ({ route, navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-          <View>
+          <View style={{ alignSelf: 'flex-start', marginHorizontal:20 }}>
             <Text style={{ color: '#2B4C74', fontSize: 17, fontFamily: 'FredokaOne-Regular' }}>{'\u20B9'}{itemPrice}</Text>
             <Text style={{ color: colors.darkGrey, marginTop: 30, fontSize: 17, fontFamily: 'Roboto-Medium', }}>{itemDesc}</Text>
           </View>

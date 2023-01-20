@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Text, SafeAreaView, Dimensions, Image, TouchableOpacity, FlatList } from "react-native";
+import { View, StyleSheet, Text, SafeAreaView, Dimensions, Image, TouchableOpacity, FlatList, ScrollView } from "react-native";
 
 import Header from "../common/components/headerAll";
 import colors from "../common/components/colors";
@@ -9,6 +9,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { dummyFoodItemData } from "../../data/data";
 import { images } from "../../data/data";
 import Slider from "../common/components/slider";
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const heightHomeUpperContent = Dimensions.get('window').height / 4;
 //const heightMiddleContent = Dimensions.get('window').height / 6;
@@ -35,6 +40,8 @@ const Offer = ({ route, navigation }) => {
     // console.log('Dummy Offer Data', dummyOfferData);
     // console.log('My Offer Data URL', dummyOfferData[0].url);
     // console.log('My Offer Data Title', dummyOfferData[0].title);
+    console.log('Width: ', width);
+    console.log('Height: ', height);
   }, []);
 
   const CardPopular = ({ item }) => {
@@ -50,7 +57,10 @@ const Offer = ({ route, navigation }) => {
         <View style={styles.cardPopular}>
           <View
             style={{
-              height: 100,
+              // height: 100,
+              // height: height / 4,
+              // height: responsiveHeight(15),
+              flex: 1,
               alignItems: 'center',
               flexDirection: 'row'
             }}>
@@ -62,8 +72,8 @@ const Offer = ({ route, navigation }) => {
               style={styles.iconPopular}
             //style={{ flex: 1, resizeMode: 'contain' }}
             />
-            <View style={{ top: -50, }}>
-              <Icon name="heart-outline" size={15} color='#694fad' />
+            <View style={{ alignSelf: 'flex-start' }}>
+              <Icon name="heart-outline" size={responsiveWidth(5)} color='#694fad' />
             </View>
           </View>
           <View style={{ alignItems: 'center', }}>
@@ -80,13 +90,14 @@ const Offer = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.shadow }}>
       <Header
         title="Offer"
         onPressBack={() => navigation.goBack()}
       />
-      <Slider />
-      {/* <View style={styles.cardView}>
+      <ScrollView>
+        <Slider />
+        {/* <View style={styles.cardView}>
         <Image
           style={styles.image}
           source={{ uri: offerData[0].url }}
@@ -109,28 +120,29 @@ const Offer = ({ route, navigation }) => {
           <Text style={{ fontWeight: '500', marginBottom: 5, fontSize: 16, color: colors.black }}>{offerData[0].description}</Text>
         </View>
       </View> */}
-      <View style={{ backgroundColor: colors.shadow, height: height-580,}}>
-        <Text style={{ marginHorizontal: 20, fontFamily: 'FredokaOne-Regular', fontSize: 18, color: colors.black, marginTop: 10 }}>Recommended Sides</Text>
-        <FlatList
-          // columnWrapperStyle={{ justifyContent: 'space-between' }}
-          // showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          //vertical
-          horizontal
-          contentContainerStyle={{
-            marginTop: 10,
-            marginHorizontal: 20,
-            // backgroundColor: '#000',
-            // paddingBottom: 10,
-            //flex:0,
-          }}
-          // numColumns={3}
-          data={dummyFoodItemData}
-          renderItem={({ item }) => {
-            return <CardPopular item={item} />;
-          }}
-        />
-      </View>
+        <View style={{ flex: 1 }}>
+          <Text style={{ marginHorizontal: 20, fontFamily: 'FredokaOne-Regular', fontSize: 18, color: colors.black, marginTop: 10 }}>Recommended Sides</Text>
+          <FlatList
+            // columnWrapperStyle={{ justifyContent: 'space-between' }}
+            // showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            //vertical
+            horizontal
+            contentContainerStyle={{
+              marginTop: 10,
+              marginHorizontal: 20,
+              // backgroundColor: '#000',
+              // paddingBottom: 10,
+              //flex:0,
+            }}
+            // numColumns={3}
+            data={dummyFoodItemData}
+            renderItem={({ item }) => {
+              return <CardPopular item={item} />;
+            }}
+          />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -164,9 +176,12 @@ const styles = StyleSheet.create({
     // borderRadius: 10
   },
   cardPopular: {
-    height: 160,
+    // height: 160,
+    // flex: 1,
+    height: responsiveHeight(30),
+    width: responsiveWidth(40),
     backgroundColor: colors.white,
-    width: widthPopular,
+    // width: widthPopular,
     marginHorizontal: 5,
     borderRadius: 5,
     // borderBottomEndRadius: 50,

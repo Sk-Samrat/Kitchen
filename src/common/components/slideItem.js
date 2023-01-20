@@ -47,21 +47,23 @@ const SlideItem = ({ item }) => {
                 <Text style={styles.description}>{item.description}</Text>
                 <Text style={styles.price}>{item.price}</Text>
             </View> */}
-            <View style={{ marginHorizontal: 20, height: height - 640, marginTop:10}}>
-                <View>
-                    <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black }}>{item.title}</Text>
-                </View>
-                <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black, }}>{'\u20B9'}{item.price}</Text>
-                    <View style={{ flexDirection: 'row', backgroundColor: colors.violet, borderRadius: 5, padding: 5 }}>
-                        <Icon name="remove-outline" size={20} color={colors.white} />
-                        <Text style={{ color: colors.white, marginHorizontal: 10 }}>1</Text>
-                        <Icon name="add-outline" size={20} color={colors.white} />
+            <View style={{ flex: 1, backgroundColor: colors.white }}>
+                <View style={{ marginHorizontal: 20, marginTop: 10 }}>
+                    <View>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black }}>{item.title}</Text>
                     </View>
-                </View>
-                <View style={{ marginVertical: 20 }}>
-                    <Text style={{ fontFamily: 'FredokaOne-Regular', marginBottom: 2, fontSize: 18, color: colors.black }}>Description</Text>
-                    <Text style={{ fontWeight: '500', marginBottom: 5, fontSize: 16, color: colors.black }}>{item.description}</Text>
+                    <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black, }}>{'\u20B9'}{item.price}</Text>
+                        <View style={{ flexDirection: 'row', backgroundColor: colors.violet, borderRadius: 5, padding: 5 }}>
+                            <Icon name="remove-outline" size={20} color={colors.white} />
+                            <Text style={{ color: colors.white, marginHorizontal: 10 }}>1</Text>
+                            <Icon name="add-outline" size={20} color={colors.white} />
+                        </View>
+                    </View>
+                    <View style={{ marginVertical: 20 }}>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', marginBottom: 2, fontSize: 18, color: colors.black }}>Description</Text>
+                        <Text style={{ fontWeight: '500', marginBottom: 5, fontSize: 16, color: colors.black }}>{item.description}</Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -73,7 +75,7 @@ export default SlideItem;
 const styles = StyleSheet.create({
     container: {
         width,
-        height: '50%',
+        height: '75%',
         // alignItems: 'center',
         backgroundColor: colors.shadow,
     },

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "866326172057",
+    "project_id": "cloudkitchen-dcd64",
+    "storage_bucket": "cloudkitchen-dcd64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866326172057:android:3ff42d4afc2f253392c308",
+        "android_client_info": {
+          "package_name": "com.cloud_kitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866326172057-k227t276hk0gprc1i284at2al15q7eu1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cloud_kitchen",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "866326172057-dbv22c8u6nvtn6m51mdcjeihf0731p4j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8vb-bzxSSL1QVoL_9htu81gO5GT5epuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "866326172057-dbv22c8u6nvtn6m51mdcjeihf0731p4j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
