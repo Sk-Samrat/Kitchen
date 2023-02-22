@@ -39,7 +39,7 @@ const cartSlice = createSlice({
         addToCart(state, action) {
             console.log(state.cartItems);
             const itemIndex = state.cartItems.findIndex(
-                (item) => item.item.product_code === action.payload.item.product_code
+                (item) => item.item.product_id === action.payload.item.product_id
             );
 
             console.log(itemIndex);
@@ -64,7 +64,7 @@ const cartSlice = createSlice({
         },
         decreaseCart(state, action) {
             const itemIndex = state.cartItems.findIndex(
-                (item) => item.item.product_code === action.payload.item.product_code
+                (item) => item.item.product_id === action.payload.item.product_id
             );
             console.log(itemIndex);
             // console.log(action.payload.item.product_code);
@@ -77,7 +77,7 @@ const cartSlice = createSlice({
 
             } else if (state.cartItems[itemIndex].itemQuantity === 1) {
                 const nextCartItems = state.cartItems.filter(
-                    (item) => item.product_code !== action.payload.item.product_code
+                    (item) => item.product_id !== action.payload.item.product_id
                 );
 
                 state.cartItems = nextCartItems;
@@ -87,7 +87,7 @@ const cartSlice = createSlice({
         increaseCart(state, action) {
             // console.log(action.payload);
             const itemIndex = state.cartItems.findIndex(
-                (item) => item.item.product_code === action.payload.item.product_code
+                (item) => item.item.product_id === action.payload.item.product_id
             );
             console.log(itemIndex);
             // console.log(action.payload.item.id);
@@ -111,7 +111,7 @@ const cartSlice = createSlice({
         increaseCartItem(state, action) {
             // console.log(action.payload);
             const itemIndex = state.cartItems.findIndex(
-                (item) => item.item.product_code === action.payload.product_code
+                (item) => item.item.product_id === action.payload.product_id
             );
             console.log(itemIndex);
             // console.log(action.payload.item.id);
@@ -134,7 +134,7 @@ const cartSlice = createSlice({
         },
         decreaseCartItem(state, action) {
             const itemIndex = state.cartItems.findIndex(
-                (item) => item.item.product_code === action.payload.product_code
+                (item) => item.item.product_id === action.payload.product_id
             );
             console.log(itemIndex);
             // console.log(action.payload.item.product_code);
@@ -158,11 +158,11 @@ const cartSlice = createSlice({
             console.log('remove from cart');
             console.log('action.payload', action.payload.item);
             state.cartItems.map((cartItem) => {
-                if (cartItem.item.product_code === action.payload.item.product_code) {
+                if (cartItem.item.product_id === action.payload.item.product_id) {
                     // console.log('action.payload', action.payload.item.product_code);
                     // console.log('cartTtems', cartItem.item.product_code);
                     const nextCartItems = state.cartItems.filter(
-                        (item) => item.item.product_code != action.payload.item.product_code
+                        (item) => item.item.product_id != action.payload.item.product_id
                     );
                     // console.log('nextCartTtems', nextCartItems);
                     state.cartItems = nextCartItems;
@@ -174,13 +174,13 @@ const cartSlice = createSlice({
         // },
         removeFromCartItem(state, action) {
             console.log('Welcome to Remove Cart Items from Cart');
-            console.log('action.payload', action.payload.product_code);
+            console.log('action.payload', action.payload.product_id);
             state.cartItems.map((cartItem) => {
-                if (cartItem.item.product_code === action.payload.product_code) {
+                if (cartItem.item.product_id === action.payload.product_id) {
                     // console.log('action.payload', action.payload.item.product_code);
                     // console.log('cartTtems', cartItem.item.product_code);
                     const nextCartItems = state.cartItems.filter(
-                        (item) => item.item.product_code != action.payload.product_code
+                        (item) => item.item.product_id != action.payload.product_id
                     );
                     // console.log('nextCartTtems', nextCartItems);
                     state.cartItems = nextCartItems;

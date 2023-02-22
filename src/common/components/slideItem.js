@@ -10,6 +10,13 @@ import {
 import React from 'react';
 import colors from './colors';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
+
+import globalStyle from './globalStyle';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -24,13 +31,13 @@ const SlideItem = ({ item }) => {
     }).start();
 
     return (
-        <View style={styles.container}>
+        <View style={globalStyle.sliderContainer}>
             <View style={{ height: height / 4, width: '100%', backgroundColor: 'yellow' }}>
                 <Animated.Image
                     source={{ uri: item.url }}
                     // resizeMode="contain"
                     style={[
-                        styles.image,
+                        globalStyle.imageSlider,
                         {
                             transform: [
                                 {
@@ -50,19 +57,19 @@ const SlideItem = ({ item }) => {
             <View style={{ flex: 1, backgroundColor: colors.white }}>
                 <View style={{ marginHorizontal: 20, marginTop: 10 }}>
                     <View>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black }}>{item.title}</Text>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(2), color: colors.black }}>{item.title}</Text>
                     </View>
                     <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 20, color: colors.black, }}>{'\u20B9'}{item.price}</Text>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: responsiveFontSize(2), color: colors.black, }}>{'\u20B9'}{item.price}</Text>
                         <View style={{ flexDirection: 'row', backgroundColor: colors.violet, borderRadius: 5, padding: 5 }}>
-                            <Icon name="remove-outline" size={20} color={colors.white} />
-                            <Text style={{ color: colors.white, marginHorizontal: 10 }}>1</Text>
-                            <Icon name="add-outline" size={20} color={colors.white} />
+                            <Icon name="remove-outline" size={responsiveWidth(4)} color={colors.white} />
+                            <Text style={{ color: colors.white, marginHorizontal: 10, fontSize: responsiveFontSize(1.5) }}>1</Text>
+                            <Icon name="add-outline" size={responsiveWidth(4)} color={colors.white} />
                         </View>
                     </View>
                     <View style={{ marginVertical: 20 }}>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', marginBottom: 2, fontSize: 18, color: colors.black }}>Description</Text>
-                        <Text style={{ fontWeight: '500', marginBottom: 5, fontSize: 16, color: colors.black }}>{item.description}</Text>
+                        <Text style={{ fontFamily: 'FredokaOne-Regular', marginBottom: 2, fontSize: responsiveFontSize(1.5), color: colors.black }}>Description</Text>
+                        <Text style={{ fontWeight: '500', marginBottom: 5, fontSize: responsiveFontSize(1.5), color: colors.black }}>{item.description}</Text>
                     </View>
                 </View>
             </View>
@@ -73,36 +80,36 @@ const SlideItem = ({ item }) => {
 export default SlideItem;
 
 const styles = StyleSheet.create({
-    container: {
-        width,
-        height: '75%',
-        // alignItems: 'center',
-        backgroundColor: colors.shadow,
-    },
-    image: {
-        // flex: 0.6,
-        height: height / 4,
-        width: '100%',
-    },
-    content: {
-        // flex: 0.4,
-        height: height / 4,
-        width: '100%',
-        // alignItems: 'center',
-        backgroundColor: 'violet',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#333',
-    },
-    description: {
-        fontSize: 18,
-        marginVertical: 12,
-        color: '#333',
-    },
-    price: {
-        fontSize: 32,
-        fontWeight: 'bold',
-    },
+    // sliderContainer: {
+    //     width,
+    //     height: '75%',
+    //     // alignItems: 'center',
+    //     backgroundColor: colors.shadow,
+    // },
+    // imageSlider: {
+    //     // flex: 0.6,
+    //     height: height / 4,
+    //     width: '100%',
+    // },
+    // content: {
+    //     // flex: 0.4,
+    //     height: height / 4,
+    //     width: '100%',
+    //     // alignItems: 'center',
+    //     backgroundColor: 'violet',
+    // },
+    // title: {
+    //     fontSize: 24,
+    //     fontWeight: 'bold',
+    //     color: '#333',
+    // },
+    // description: {
+    //     fontSize: 18,
+    //     marginVertical: 12,
+    //     color: '#333',
+    // },
+    // price: {
+    //     fontSize: 32,
+    //     fontWeight: 'bold',
+    // },
 });

@@ -7,14 +7,23 @@ import { decreaseCart, increaseCart, removeFromCart, getTotals } from '../../red
 import { increaseQty, decreaseQty, removeQty } from "../../reducers/MyProductSlice";
 // import axios from 'axios';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 import { images } from "../../data/data";
+import colors from "../common/components/colors";
+import globalStyle from "../common/components/globalStyle";
 
 function CartItemsContainer() {
 
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart.cartItems);
+
+  const myProducts = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(getTotals());
@@ -25,28 +34,25 @@ function CartItemsContainer() {
       data={cart}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({ item, index }) => (
-        <View style={styles.cartItem}>
+        <View style={globalStyle.cartItem}>
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Image
-              style={styles.cartItemImg}
+              style={globalStyle.cartItemImg}
               //source={{uri: 'http://140.238.246.162/media/20220720-153940.png'}}
               //source={item.main_image}
-              // source={{ uri: `http://140.238.246.162/${item.item.main_image}` }}
-              source={images.imageObject[item.item.product_code]}
+              source={{ uri: `http://10.0.2.2:8000/${item.item.main_image}` }}
+              // source={images.imageObject[item.item.product_code]}
             // width={200}
             // height={150}
             />
-            {/* <Text style={styles.cartItemTitle}>{item.cartQuantity}</Text> */}
-            {/* <Text style={styles.cartItemTitle}>{item.item.product_name}</Text> */}
-            {/* <Text style={styles.cartItemTitle}>{item.item.main_image}</Text> */}
           </View>
-          <View style={{ backgroundColor: "white", flex: 2 }}>
-            <Text style={styles.cartItemTitle}>{item.item.product_name}</Text>
-            <Text style={styles.cartItemPrice}>${item.item.product_price}</Text>
-            <View style={styles.cartItemAmount}>
+          <View style={{ backgroundColor: colors.white, flex: 2 }}>
+            <Text style={globalStyle.cartItemTitle}>{item.item.product_name}</Text>
+            <Text style={globalStyle.cartItemPrice}>${item.item.product_price}</Text>
+            <View style={globalStyle.cartItemAmount}>
               <TouchableOpacity
                 onPress={() => {
-                  dispatch(decreaseQty(item.item.product_code));
+                  dispatch(decreaseQty(item.item.product_id));
                   if (item.itemQuantity === 1) {
                     // console.log('item', item);
                     dispatch(removeFromCart(item));
@@ -56,32 +62,33 @@ function CartItemsContainer() {
                   dispatch(decreaseCart(item));
                 }}
               >
-                <Icon name="md-remove" size={24} color="black" />
+                <Icon name="md-remove" size={responsiveWidth(4)} color="black" />
               </TouchableOpacity>
-              <Text style={styles.cartItemAmountText}>{item.itemQuantity}</Text>
+              <Text style={globalStyle.cartItemAmountText}>{item.itemQuantity}</Text>
               <TouchableOpacity
                 onPress={() => {
                   dispatch(increaseCart(item));
-                  dispatch(increaseQty(item.item.product_code));
+                  dispatch(increaseQty(item.item.product_id));
                 }}
               >
-                <Icon name="md-add" size={24} color="black" />
+                <Icon name="md-add" size={responsiveWidth(4)} color="black" />
               </TouchableOpacity>
             </View>
-            <View style={styles.cartItemRemove}>
+            <View style={globalStyle.cartItemRemove}>
               <TouchableOpacity
                 onPress={() => {
                   // console.log('remove', item);
                   dispatch(removeFromCart(item));
-                  dispatch(removeQty(item.item.product_code));
+                  dispatch(removeQty(item.item.product_id));
+                  console.log('Remove Quantity from My Products: ', myProducts);
                 }}
-                style={styles.cartItemRemoveButton}
+                style={globalStyle.cartItemRemoveButton}
               >
-                <Icon name="md-trash" size={15} color="black" />
-                <Text>Remove</Text>
+                <Icon name="md-trash" size={responsiveWidth(4)} color={colors.red} />
+                <Text style={{color:colors.red,fontSize: responsiveFontSize(1)}}>Remove</Text>
               </TouchableOpacity>
             </View>
-            <Text style={[{ marginTop: 10, fontSize: 18 }, styles.cartItemPrice]}>Price : ${item.item.product_price * item.itemQuantity}</Text>
+            <Text style={[{ marginTop: 10, fontSize: responsiveFontSize(1.5) }, globalStyle.cartItemPrice]}>Price : ${item.item.product_price * item.itemQuantity}</Text>
           </View>
         </View>
       )} />
@@ -89,54 +96,3 @@ function CartItemsContainer() {
 };
 
 export default CartItemsContainer;
-
-const styles = StyleSheet.create({
-  cartItem: {
-    padding: 20,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginHorizontal: 20,
-    marginVertical: 10,
-    borderRadius: 10,
-    shadowColor: "black",
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  cartItemImg: {
-    width: 80,
-    height: 80,
-    resizeMode: "stretch",
-    //backgroundColor: "white",
-  },
-  cartItemTitle: {
-    fontSize: 18,
-    marginVertical: 5,
-  },
-  cartItemPrice: {
-    fontSize: 14,
-    color: "coral",
-    fontWeight: "bold",
-  },
-  cartItemAmount: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  cartItemAmountText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  cartItemRemove: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cartItemRemoveButton: {
-    marginHorizontal: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-});

@@ -2,17 +2,24 @@ import React from "react";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { ContactStackNavigator } from "./stackNavigation";
+import { ContactStackNavigator, MyOrdersStackNavigator } from "./stackNavigation";
 import TabNavigator from "./tabNavigator";
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import FoodCourt from "../../screens/foodCourt";
 import Cart from "../../screens/cart";
 import colors from "../../common/components/colors";
+import Settings from "../../screens/settings";
 
 import CustomDrawer from "../../common/components/customDrawer";
 import EditDetails from "../../screens/editDetails";
 import CustomDrawerEditProfile from "../../common/components/customDrawerEditProfile";
+
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const screenOptionStyle = {
     headerShown: false,
@@ -24,9 +31,10 @@ const screenOptionStyle = {
     drawerActiveTintColor: '#fff',
     drawerInactiveTintColor: '#333',
     drawerLabelStyle: {
-        marginLeft: -25,
+        //marginLeft: -25,
+        marginLeft: responsiveWidth(-2.5),
         fontFamily: 'Roboto-Medium',
-        fontSize: 15,
+        fontSize: responsiveFontSize(1.5),
     },
 };
 
@@ -46,7 +54,7 @@ const DrawerNavigator = () => {
                     drawerIcon: ({ focused, size }) => (
                         <Icon
                             name="md-home"
-                            size={size}
+                            size={responsiveFontSize(2.2)}
                             color={focused ? '#fff' : '#ccc'}
                         />
                     ),
@@ -60,7 +68,7 @@ const DrawerNavigator = () => {
                     drawerIcon: ({ focused, size }) => (
                         <Icon
                             name="fast-food"
-                            size={size}
+                            size={responsiveFontSize(2.2)}
                             color={focused ? '#fff' : '#ccc'}
                         />
                     ),
@@ -74,7 +82,7 @@ const DrawerNavigator = () => {
                     drawerIcon: ({ focused, size }) => (
                         <Icon
                             name="cart"
-                            size={size}
+                            size={responsiveFontSize(2.2)}
                             color={focused ? '#fff' : '#ccc'}
                         />
                     ),
@@ -88,7 +96,35 @@ const DrawerNavigator = () => {
                     drawerIcon: ({ focused, size }) => (
                         <Icon
                             name="md-call"
-                            size={size}
+                            size={responsiveFontSize(2.2)}
+                            color={focused ? '#fff' : '#ccc'}
+                        />
+                    ),
+                }}
+            />
+            <Drawer.Screen name="MyOrders"
+                component={MyOrdersStackNavigator}
+                // component={TabNavigator}
+                options={{
+                    drawerLabel: 'My Orders',
+                    drawerIcon: ({ focused, size }) => (
+                        <Icon
+                            name="gift"
+                            size={responsiveFontSize(2.2)}
+                            color={focused ? '#fff' : '#ccc'}
+                        />
+                    ),
+                }}
+            />
+            <Drawer.Screen name="MySettings"
+                component={Settings}
+                // component={TabNavigator}
+                options={{
+                    drawerLabel: 'Settings',
+                    drawerIcon: ({ focused, size }) => (
+                        <Icon
+                            name="settings"
+                            size={responsiveFontSize(2.2)}
                             color={focused ? '#fff' : '#ccc'}
                         />
                     ),

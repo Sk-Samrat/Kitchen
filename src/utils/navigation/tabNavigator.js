@@ -10,6 +10,12 @@ import FoodCourt from "../../screens/foodCourt";
 import Cart from "../../screens/cart";
 import PopularFood from "../../screens/popularFood";
 
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+  } from "react-native-responsive-dimensions";
+
 const screenOptionStyle = {
     headerShown: false,
     tabBarActiveTintColor: '#694fad',
@@ -30,7 +36,7 @@ const BottomTabNavigator = () => {
                     tabBarIcon: ({ focused, size }) => (
                         <Icon
                             name="md-home"
-                            size={size}
+                            size={responsiveFontSize(1.5)}
                             color={focused ? '#694fad' : '#ccc'}
                         />
                     ),
@@ -45,7 +51,7 @@ const BottomTabNavigator = () => {
                         <Icon
                             name="fast-food"
                             color={focused ? '#694fad' : '#ccc'}
-                            size={size}
+                            size={responsiveFontSize(1.5)}
                         />
                     ),
                 }}
@@ -59,7 +65,7 @@ const BottomTabNavigator = () => {
                         <Icon
                             name="cart"
                             color={focused ? '#694fad' : '#ccc'}
-                            size={size}
+                            size={responsiveFontSize(1.5)}
                         />
                     ),
                 }}

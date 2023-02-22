@@ -1,12 +1,17 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 // import { useDispatch, useSelector } from "react-redux";
 //import { cartTotalSelector } from "../redux/selectors";
 // import { getTotals } from '../reducers/cartItems';
 import colors from "./colors";
 
-const Header = (props, navigation) => {
+const Header = (props) => {
     //   const total = useSelector(cartTotalSelector);
     // const total = 0;
 
@@ -22,13 +27,13 @@ const Header = (props, navigation) => {
                     activeOpacity={0.8}
                     onPress={props.onPressMenu}
                 >
-                    <Icon name="menu-outline" size={30} color='#694fad' />
+                    <Icon name="menu-outline" size={responsiveWidth(5)} color='#694fad' />
                 </TouchableOpacity>
             </View>
             <View>
-                <Text style={{ color: '#694fad', fontWeight: 'bold', fontSize: 20, }}>{props.title}</Text>
+                <Text style={{ color: '#694fad', fontWeight: 'bold', fontSize: responsiveFontSize(2), }}>{props.title}</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: 'flex-end'}}>
+            <View style={{ flexDirection: "row", justifyContent: 'flex-end' }}>
                 {/* <TouchableOpacity
                     style={{ flexDirection: "row", flex: 1.5, justifyContent: 'flex-end', }}
                 // onPress={props.onPressLogout}
@@ -40,7 +45,7 @@ const Header = (props, navigation) => {
                         style={{ flexDirection: "row", justifyContent: 'flex-end', }}
                     // onPress={props.onPressCart}
                     >
-                        <Icon name="heart-outline" size={30} color='#694fad' />
+                        <Icon name="heart-outline" size={responsiveWidth(5)} color='#694fad' />
                         <View
                             style={{
                                 flexDirection: "column",
@@ -48,14 +53,14 @@ const Header = (props, navigation) => {
                                 height: 20,
                             }}
                         >
-                            <Text style={{ color: '#694fad', fontSize: 12 }}>{cartTotalQuantity}</Text>
+                            <Text style={{ color: '#694fad', fontSize: responsiveFontSize(1) }}>{cartTotalQuantity}</Text>
                         </View>
                     </TouchableOpacity>) :
                     (<TouchableOpacity
                         style={{ flexDirection: "row", justifyContent: 'flex-end' }}
                     // onPress={props.onPressCart}
                     >
-                        <Icon name="heart" size={30} color='#694fad' />
+                        <Icon name="heart" size={responsiveWidth(5)} color='#694fad' />
                         <View
                             style={{
                                 flexDirection: "column",

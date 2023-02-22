@@ -11,10 +11,13 @@ import {
     responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
+import globalStyle from '../common/components/globalStyle';
+import { CardPopular, CardPopularList } from '../common/uiComponent';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const widthCategory = Dimensions.get('window').width / 3 - 20;
-const heightHomeUpperContent = Dimensions.get('window').height / 14;
-const widthPopular = Dimensions.get('window').width / 2 - 30;
+const widthCategory = Dimensions.get('window').width / 3 - responsiveHeight(2);
+const heightHomeUpperContent = Dimensions.get('window').height / responsiveHeight(1.5);
+const widthPopular = Dimensions.get('window').width / 2 - responsiveWidth(3);
 
 const heightScreen = Dimensions.get('window').height;
 const widthScreen = Dimensions.get('window').width;
@@ -28,7 +31,7 @@ const PopularFood = ({ route, navigation }) => {
     const [categoryIndex, setCategoryIndex] = useState(0);
     const [foodCategory, setFoodCategory] = useState('Food');
 
-    const categories = ['Food', 'Vegetables', 'Fruits', 'Meat', 'Fish', 'Beverage'];
+    const categories = ['Food', 'Vegetable', 'Fruit', 'Meat', 'Fish', 'Beverage'];
 
     // const apiItemData = myProducts.filter(x => x.product_category === itemCategory);
 
@@ -39,16 +42,35 @@ const PopularFood = ({ route, navigation }) => {
 
     useEffect(() => {
         // dispatch(getTotals());
-        console.log('category: ', foodCategory);
-        console.log('width: ', widthScreen);
-        console.log('height: ', heightScreen);
+        // console.log('category: ', foodCategory);
+        // console.log('width: ', widthScreen);
+        // console.log('height: ', heightScreen);
         // setFilteredDataSource(myProducts);
         // setFoodCategory();
+        console.log("My Products in redux toolkit: ", myProducts);
+        console.log("My Filtered Products from redux toolkit: ", filteredDataSource);
         onPressHandler();
     }, [foodCategory]);
 
+    // useEffect(() => {
+    //     getData();
+    // }, []);
+
+    // const getData = async () => {
+    //     try {
+    //       const jsonValue = await AsyncStorage.getItem('@storage_Key')
+    //       //return jsonValue != null ? JSON.parse(jsonValue) : null;
+    //       const productList = JSON.parse(jsonValue)
+    //       console.log('Product List: ',productList)
+    //     //   setFilteredDataSource(productList)
+    //     } catch(e) {
+    //       // error reading value
+    //     }
+    //   }
+
     const onPressHandler = () => {
         const newData = myProducts.filter(x => x.product_category === foodCategory);
+        //const newData = filteredDataSource.filter(x => x.product_category === foodCategory);
         setFilteredDataSource(newData);
     }
 
@@ -58,7 +80,7 @@ const PopularFood = ({ route, navigation }) => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
             >
-                <View style={styles.categoryContainer}>
+                <View style={globalStyle.categoryContainer}>
                     {categories.map((item, index) => (
                         <TouchableOpacity
                             style={{ marginRight: 10 }}
@@ -71,10 +93,10 @@ const PopularFood = ({ route, navigation }) => {
                         >
                             {categoryIndex === index ?
                                 (<View style={{ width: widthCategory, alignItems: 'center', borderBottomWidth: 2, borderBottomColor: colors.violet, }}>
-                                    <Text style={styles.categoryTextSelected}>{item}</Text>
+                                    <Text style={globalStyle.categoryTextSelected}>{item}</Text>
                                 </View>) :
                                 (<View style={{ width: widthCategory, alignItems: 'center', }}>
-                                    <Text style={styles.categoryText}>{item}</Text>
+                                    <Text style={globalStyle.categoryText}>{item}</Text>
                                 </View>)
                             }
                         </TouchableOpacity>
@@ -85,53 +107,11 @@ const PopularFood = ({ route, navigation }) => {
         );
     };
 
-    const CardPopular = ({ item }) => {
-        return (
-            <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => {
-                    navigation.navigate('PopularFood', {
-                        item_category: item.product_category,
-                        // item_category: 'food',
-                        item_name: item.product_name,
-                        // item_name: 'fish',
-                    });
-                }}
-            >
-                <View style={styles.cardPopular}>
-                    <View
-                        style={{
-                            // height: heightScreen / 4,
-                            // height: 350,
-                            flex: 1,
-                            // height: responsiveHeight(15),
-                            alignItems: 'center',
-                            flexDirection: 'row'
-                        }}>
-                        <Image
-                            //source={{uri: 'http://140.238.246.162/media/20220720-153940.png'}}
-                            // source={{ uri: `http://140.238.246.162/${item.main_image}` }}
-                            // source={require('../assets/images/food-1.png')}
-                            source={images.imageObject[item.product_code]}
-                            style={styles.iconPopular}
-                        //style={{ flex: 1, resizeMode: 'contain' }}
-                        />
-                        <View style={{ alignSelf: 'flex-start' }}>
-                            <Icon name="heart-outline" size={responsiveWidth(5)} color='#694fad' />
-                        </View>
-                    </View>
-                    <View style={{ alignItems: 'center', }}>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 17, color: colors.black, }}>
-                            {item.product_name}
-                        </Text>
-                        <Text style={{ fontFamily: 'FredokaOne-Regular', fontSize: 17, color: colors.black, }}>
-                            {'\u20B9'}{item.product_price}
-                        </Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        );
-    };
+    const onPressCardPopular = (item) => {
+        navigation.navigate('PopularFood', {
+            item_category: item.product_category,
+        });
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
@@ -144,7 +124,7 @@ const PopularFood = ({ route, navigation }) => {
             </View>
             <View style={{ flex: 1, backgroundColor: colors.smoke, }}>
                 {/* <ScrollView > */}
-                <View style={{ flex: 1, marginBottom: 10, marginHorizontal: 20, }}>
+                <View style={{ flex: 1, marginBottom: responsiveHeight(1), marginHorizontal: 20, }}>
                     <FlatList
                         columnWrapperStyle={{ justifyContent: 'space-between' }}
                         showsVerticalScrollIndicator={false}
@@ -152,15 +132,15 @@ const PopularFood = ({ route, navigation }) => {
                         vertical
                         // horizontal
                         contentContainerStyle={{
-                            marginTop: 10,
-                            // backgroundColor: '#000',
+                            marginTop: responsiveHeight(1),
+                            // backgroundColor: colors.badRed,
                             // paddingBottom: 10,
                             //flex:0,
                         }}
                         numColumns={2}
                         data={filteredDataSource}
                         renderItem={({ item }) => {
-                            return <CardPopular item={item} />;
+                            return <CardPopularList item={item} onPressItem={onPressCardPopular} style={{marginBottom:responsiveHeight(1)}}/>;
                         }}
                     />
                 </View>
@@ -169,66 +149,5 @@ const PopularFood = ({ route, navigation }) => {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    categoryContainer: {
-        flexDirection: 'row',
-        //marginTop: 20,
-        // marginBottom: 0,
-        justifyContent: 'space-between',
-        // backgroundColor: 'red'
-        // alignItems: 'baseline',
-        //paddingHorizontal: 20,
-        //marginLeft: 10,
-        //flex: 1,
-        alignSelf: 'flex-end'
-    },
-    categoryText: {
-        fontSize: 17,
-        color: 'grey',
-        fontFamily: 'FredokaOne-Regular',
-        // marginHorizontal: 20,
-        // backgroundColor: 'yellow',
-        //justifyContent: 'space-between',
-    },
-    categoryTextSelected: {
-        color: colors.violet,
-        paddingBottom: 5,
-        // borderBottomWidth: 2,
-        // borderColor: colors.violet,
-        fontFamily: 'FredokaOne-Regular',
-        fontSize: 20,
-        // marginHorizontal: 20,
-    },
-    cardPopular: {
-        // height: 170,
-        //flex: 1,
-        height: responsiveHeight(30),
-        width: responsiveWidth(40),
-        backgroundColor: colors.white,
-        //width: widthPopular,
-        marginVertical: 5,
-        borderRadius: 5,
-        // borderBottomEndRadius: 50,
-        // borderBottomLeftRadius: 25,
-        // borderBottomRightRadius: 25,
-        // marginBottom: 2,
-        // paddingTop: 5,
-        // paddingHorizontal: 30,
-        padding: 15,
-        // shadowColor: colors.black,
-        elevation: 10,
-    },
-    iconPopular: {
-        flex: 1,
-        width: widthPopular,
-        resizeMode: "contain",
-    },
-});
 
 export default PopularFood;

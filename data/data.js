@@ -1,18 +1,59 @@
+export const apidata = [{
+        product_name: 'Food',
+        product_price: 25,
+        main_image: 'food-1.png',
+        product_id: '1',
+        product_category: 'Food'
+}, {
+        product_name: 'Vegetable',
+        product_price: 25,
+        main_image: 'vegetables-1.png',
+        product_id: '2',
+        product_category: 'Vegetables'
+}, {
+        product_name: 'Fruit',
+        product_price: 25,
+        main_image: 'fruits-1.png',
+        product_id: '3',
+        product_category: 'Fruits'
+}, {
+        product_name: 'Meat',
+        product_price: 25,
+        main_image: 'meat-1.png',
+        product_id: '4',
+        product_category: 'Meat'
+}, {
+        product_name: 'Fish',
+        product_price: 25,
+        main_image: 'fish-1.png',
+        product_id: '5',
+        product_category: 'Fish'
+}, {
+        product_name: 'Bevarage',
+        product_price: 25,
+        main_image: 'drinks-1.png',
+        product_id: '6',
+        product_category: 'Bevarage'
+}];
+
 export const dummyData =
         [{
-                title: 'Anise Aroma Art Bazar', url: 'https://i.ibb.co/hYjK44F/anise-aroma-art-bazaar-277253.jpg',
+                title: 'Anise Aroma Art Bazar', 
+		url: 'https://i.ibb.co/hYjK44F/anise-aroma-art-bazaar-277253.jpg',
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 id: 1,
                 price: 1500
         },
         {
-                title: 'Food inside a Bowl', url: 'https://i.ibb.co/JtS24qP/food-inside-bowl-1854037.jpg',
+                title: 'Food inside a Bowl', 
+		url: 'https://i.ibb.co/JtS24qP/food-inside-bowl-1854037.jpg',
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 id: 2,
                 price: 1500
         },
         {
-                title: 'Vegatable Salad', url: 'https://i.ibb.co/JxykVBt/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg',
+                title: 'Vegatable Salad', 
+		url: 'https://i.ibb.co/JxykVBt/flat-lay-photography-of-vegetable-salad-on-plate-1640777.jpg',
                 description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                 id: 3,
                 price: 1500
@@ -337,7 +378,7 @@ export const images = {
                 '16': require('../src/assets/images/chilli-chicken-2-removebg.png'),
                 '17': require('../src/assets/images/chicken-briyani.png'),
                 '18': require('../src/assets/images/mutton-briyani.png'),
-                '19': require('../src/assets/images/egg-briyani-removebg.png'),
+                '19': require('../src/assets/images/egg-briyani.jpg'),
                 '20': require('../src/assets/images/veg-burger-removebg.png'),
                 '21': require('../src/assets/images/egg-roll-removebg.png'),
                 '33': require('../src/assets/images/carrots-removebg.png'),
@@ -359,5 +400,20 @@ export const images = {
                 '49': require('../src/assets/images/strawberry.png'),
                 '50': require('../src/assets/images/kiwi-removebg.png'),
                 '51': require('../src/assets/images/papaya.png'),
+        }
+}
+
+export const imagesIcon = {
+        imageObject: {
+                '1': require('../src/assets/images/food-1.png'),
+                '2': require('../src/assets/images/vegetables-4.png'),
+                '3': require('../src/assets/images/fruits-1.png'),
+                '4': require('../src/assets/images/meat-2.png'),
+                '5': require('../src/assets/images/fish-1.png'),
+                '6': require('../src/assets/images/drinks-2.png'),
+                '11': require('../src/assets/images/offer-1.jpg'),
+                '12': require('../src/assets/images/offer-2.jpg'),
+                '13': require('../src/assets/images/offer-3.jpg'),
+                '14': require('../src/assets/images/food-coupons.jpg'),
         }
 }

@@ -3,17 +3,24 @@ import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, Dimensio
 import { addToCart, decreaseCart, increaseCart, removeFromCart, getTotals, increaseCartItem, removeFromCartItem } from '../../reducers/cartItems';
 import { increaseQty, decreaseQty } from '../../reducers/MyProductSlice';
 import { useDispatch, useSelector } from "react-redux";
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 import colors from "../common/components/colors";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { dummyFoodItemData } from "../../data/data";
 import { images } from "../../data/data";
+import globalStyle from "../common/components/globalStyle";
 
 const widthImageIcon = Dimensions.get('window').width - 40;
 
 const widthCard = Dimensions.get('window').width;
 
-const widthItem = Dimensions.get('window').width - 60;
+// const widthItem = Dimensions.get('window').width - 60;
+const widthItem = Dimensions.get('window').width - responsiveWidth(6);
 
 const FoodItemDetails = ({ route, navigation }) => {
 
@@ -68,29 +75,29 @@ const FoodItemDetails = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.center}>
+    <SafeAreaView style={globalStyle.center}>
       {/* <ScrollView> */}
-      <View style={styles.backBtn}>
+      <View style={globalStyle.backBtn}>
         <TouchableOpacity
           activeOpacity={0.8}
           // onPress={() => navigation.navigate('FoodItemDetails', item)}
           onPress={() => navigation.goBack()}
         >
-          <Icon name="chevron-back-outline" size={25} style={styles.icon} />
+          <Icon name="chevron-back-outline" size={responsiveWidth(5)} style={globalStyle.iconBtn} />
         </TouchableOpacity>
-        <Text style={{ marginTop: 10, fontSize: 25, color: '#2B4C74', fontFamily: 'FredokaOne-Regular' }}>Details</Text>
+        <Text style={{ marginTop: 10, fontSize: responsiveFontSize(2), color: '#2B4C74', fontFamily: 'FredokaOne-Regular' }}>Details</Text>
         <TouchableOpacity
           activeOpacity={0.8}
         // onPress={() => navigation.navigate('FoodItemDetails', item)}
         // onPress={() => navigation.goBack()}
         >
-          <Icon name="heart-outline" size={25} style={styles.icon} />
+          <Icon name="heart-outline" size={responsiveWidth(5)} style={globalStyle.iconBtn} />
         </TouchableOpacity>
       </View>
       <View
         style={{
           flex: 1,
-          height: 600,
+          // height: 600,
           alignItems: 'center',
           marginBottom: 20,
           // flexDirection: "row",
@@ -105,14 +112,14 @@ const FoodItemDetails = ({ route, navigation }) => {
           // source={require('../assets/images/fastfood-2-removebg.png')}
           source={images.imageObject[itemCode]}
           // source={itemImage}
-          style={styles.imageIcon}
+          style={globalStyle.imageIcon}
         />
         <View
-          style={styles.cardItemDetails}
+          style={globalStyle.cardItemDetails}
         >
           <View style={{ flexDirection: 'row', width: widthItem, justifyContent: 'space-between' }}>
             <View>
-              <Text style={{ alignItems: 'flex-start', marginTop: 10, fontSize: 25, fontWeight: '500', color: 'black', fontFamily: 'FredokaOne-Regular' }}>{itemName}</Text>
+              <Text style={{ alignItems: 'flex-start', marginTop: 10, fontSize: responsiveFontSize(1.8), color: 'black', fontFamily: 'FredokaOne-Regular' }}>{itemName}</Text>
             </View>
             <View style={{ backgroundColor: colors.smoke, borderRadius: 20, flexDirection: 'row', justifyContent: 'space-between' }}>
               <TouchableOpacity
@@ -127,120 +134,28 @@ const FoodItemDetails = ({ route, navigation }) => {
               // }}
               >
                 <View>
-                  <Icon name="remove-outline" size={20} color={colors.deepBlue} style={styles.icon} />
+                  <Icon name="remove-outline" size={responsiveWidth(5)} color={colors.deepBlue} style={globalStyle.iconBtn} />
                 </View>
               </TouchableOpacity>
-              <Text style={{ marginTop: 5, fontSize: 20, color: colors.deepBlue, fontFamily: 'Roboto-Medium', marginHorizontal: 10, }}>{itemQuantity}</Text>
+              <Text style={{ fontSize: responsiveFontSize(1.8), color: colors.deepBlue, fontFamily: 'Roboto-Medium', marginHorizontal: 10, alignSelf: 'center' }}>{itemQuantity}</Text>
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={onPressIncrement}
               >
                 <View>
-                  <Icon name="add-outline" size={20} color={colors.deepBlue} style={styles.icon} />
+                  <Icon name="add-outline" size={responsiveWidth(5)} color={colors.deepBlue} style={globalStyle.iconBtn} />
                 </View>
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ alignSelf: 'flex-start', marginHorizontal:20 }}>
-            <Text style={{ color: '#2B4C74', fontSize: 17, fontFamily: 'FredokaOne-Regular' }}>{'\u20B9'}{itemPrice}</Text>
-            <Text style={{ color: colors.darkGrey, marginTop: 30, fontSize: 17, fontFamily: 'Roboto-Medium', }}>{itemDesc}</Text>
+          <View style={{ alignSelf: 'flex-start', marginHorizontal: 20 }}>
+            <Text style={{ color: '#2B4C74', fontSize: responsiveFontSize(1.5), fontFamily: 'FredokaOne-Regular' }}>{'\u20B9'}{itemPrice}</Text>
+            <Text style={{ color: colors.darkGrey, marginTop: 30, fontSize: responsiveFontSize(1.4), fontFamily: 'Roboto-Medium' }}>{itemDesc}</Text>
           </View>
         </View>
       </View>
-      {/* <View style={styles.iconCart}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => {
-            // dispatch(addToCart(item));
-            //dispatch(addToCart([item,quantity]))
-            dispatch(addToCart({ item: item, itemQuantity: itemQuantity }));
-            dispatch(getTotals());
-          }}
-        >
-          <Text style={{ fontSize: 17, color: colors.white, fontFamily: 'FredokaOne-Regular' }}>Add to Cart</Text>
-        </TouchableOpacity>
-      </View> */}
-      {/* </ScrollView> */}
-      {/* <Text>This is the Food Item Details screen</Text> */}
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    // textAlign: "center",
-    backgroundColor: colors.lightGreyWhite,
-    paddingHorizontal: 20,
-    // marginHorizontal:20,
-  },
-  backBtn: {
-    // backgroundColor: colors.smoke,
-    padding: 5,
-    // flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10,
-  },
-  icon: {
-    padding: 10,
-    backgroundColor: colors.smoke,
-    borderRadius: 10,
-    shadowColor: colors.black,
-    elevation: 10,
-  },
-  cardItemDetails: {
-    flex: 1,
-    backgroundColor: colors.white,
-    // backgroundColor: '#EAF2F8',
-    // backgroundColor: '#EAECEE',
-    alignItems: 'center',
-    width: widthCard,
-    padding: 10,
-    borderRadius: 40,
-    elevation: 10,
-  },
-  imageIcon: {
-    flex: 0.6,
-    resizeMode: 'contain',
-    // backgroundColor: '#EAF2F8',
-    // height: 400,
-    width: widthImageIcon,
-    // borderRadius: 50,
-    // borderBottomRightRadius: 750,
-    // borderBottomLeftRadius: 250,
-    // borderTopLeftRadius: 250,
-    // borderTopRightRadius: 350,
-  },
-  iconCart: {
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    // backgroundColor: colors.smoke,
-    borderRadius: 10,
-    shadowColor: colors.black,
-    elevation: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 20,
-    backgroundColor: '#2B4C74',
-    // elevation: 5,
-    // shadowColor: colors.black,
-    // color: colors.white,
-  },
-  input: {
-    fontSize: 17,
-    fontWeight: '500',
-    // flex: 1,
-    width: 30,
-    color: colors.black,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: colors.white,
-    // marginLeft: 10,
-    // elevation: 10,
-  },
-});
 
 export default FoodItemDetails;

@@ -7,6 +7,12 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+  } from "react-native-responsive-dimensions";
+
 import colors from './colors';
 
 import {
@@ -32,12 +38,12 @@ const CustomDrawerEditProfile = ({ props, navigation }) => {
                     <DrawerItemList {...props} />
                 </View>
             </DrawerContentScrollView> */}
-            <View style={{ paddingHorizontal: 20, paddingVertical: 10 }}>
+            <View style={{ paddingHorizontal: responsiveWidth(2), paddingVertical: responsiveWidth(1) }}>
                 <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => { navigation.closeDrawer(); }}
                 >
-                    <Ionicons name="arrow-back-outline" size={25} />
+                    <Ionicons name="arrow-back-outline" size={responsiveFontSize(2.2)} />
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{
@@ -46,13 +52,13 @@ const CustomDrawerEditProfile = ({ props, navigation }) => {
                         // borderRadius: 10,
                         //borderWidth: 0.5,
                         alignSelf: 'center',
-                        marginTop: 10,
+                        marginTop: responsiveWidth(1),
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         borderBottomWidth: 1,
                         borderBottomColor: colors.darkGrey,
-                        paddingBottom: 20,
+                        paddingBottom: responsiveWidth(2),
                         // paddingLeft: 15,
                         // paddingRight: 15,
                         // backgroundColor:colors.badRed
@@ -61,68 +67,68 @@ const CustomDrawerEditProfile = ({ props, navigation }) => {
                         setClicked(!clicked);
                     }}>
                     <View style={{ flexDirection: 'column' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'Roboto-Medium', }}>
+                        <Text style={{ fontSize: responsiveFontSize(1.8), fontFamily: 'Roboto-Medium', }}>
                             My Account
                         </Text>
-                        <Text style={{ marginTop: 3, fontSize: 13, fontFamily: 'Roboto-Regular' }}>
+                        <Text style={{ marginTop: responsiveWidth(3), fontSize: responsiveFontSize(1.5), fontFamily: 'Roboto-Regular' }}>
                             Favourites & Settings
                         </Text>
                     </View>
                     {clicked ? (
-                        <Ionicons name="chevron-up-outline" size={25} />
+                        <Ionicons name="chevron-up-outline" size={responsiveFontSize(2.2)} />
                     ) : (
-                        <Ionicons name="chevron-down-outline" size={25} />
+                        <Ionicons name="chevron-down-outline" size={responsiveFontSize(2.2)} />
                     )}
                 </TouchableOpacity>
                 {clicked ?
-                    (<View style={{ paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.darkGrey, width: '100%', }}>
+                    (<View style={{ paddingVertical: responsiveWidth(1), borderBottomWidth: 1, borderBottomColor: colors.darkGrey, width: '100%', }}>
                         <TouchableOpacity
                             activeOpacity={0.5}
                             onPress={()=>{navigation.navigate('FavouriteItems')}}
                         >
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Ionicons name="heart-outline" size={25} />
-                                    <Text style={{ marginLeft: 15 }}>Favourites</Text>
+                                    <Ionicons name="heart-outline" size={responsiveFontSize(2.2)} />
+                                    <Text style={{ marginLeft: responsiveWidth(1.5),fontSize: responsiveFontSize(1.5) }}>Favourites</Text>
                                 </View>
                                 <View>
-                                    <Ionicons name="chevron-forward-outline" size={25} />
+                                    <Ionicons name="chevron-forward-outline" size={responsiveFontSize(2.2)} />
                                 </View>
                             </View>
                         </TouchableOpacity>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: responsiveWidth(2) }}>
                             <View style={{ flexDirection: 'row' }}>
-                                <Ionicons name="settings-outline" size={25} />
-                                <Text style={{ marginLeft: 15 }}>Settings</Text>
+                                <Ionicons name="settings-outline" size={responsiveFontSize(2.2)} />
+                                <Text style={{ marginLeft: responsiveWidth(1.5), fontSize: responsiveFontSize(1.5) }}>Settings</Text>
                             </View>
                             <View>
-                                <Ionicons name="chevron-forward-outline" size={25} />
+                                <Ionicons name="chevron-forward-outline" size={responsiveFontSize(2.2)} />
                             </View>
                         </View>
                     </View>) : null}
             </View>
-            <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' }}>
-                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 15 }}>
+            <View style={{ padding: responsiveWidth(2), borderTopWidth: 1, borderTopColor: '#ccc' }}>
+                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: responsiveWidth(1.5) }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="share-social-outline" size={22} />
+                        <Ionicons name="share-social-outline" size={responsiveFontSize(2.2)} />
                         <Text
                             style={{
-                                fontSize: 15,
+                                fontSize: responsiveFontSize(1.5),
                                 fontFamily: 'Roboto-Medium',
-                                marginLeft: 5,
+                                marginLeft: responsiveWidth(5),
                             }}>
                             Tell a Friend
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: 15 }}>
+                <TouchableOpacity onPress={() => { }} style={{ paddingVertical: responsiveWidth(1.5) }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="exit-outline" size={22} />
+                        <Ionicons name="exit-outline" size={responsiveFontSize(2.2)} />
                         <Text
                             style={{
-                                fontSize: 15,
+                                fontSize: responsiveFontSize(1.5),
                                 fontFamily: 'Roboto-Medium',
-                                marginLeft: 5,
+                                marginLeft: responsiveWidth(5),
                             }}>
                             Sign Out
                         </Text>

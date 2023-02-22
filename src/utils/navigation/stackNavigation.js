@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useDispatch } from "react-redux";
 
 import Home from "../../screens/home";
-import About from "../../screens/about";
 import Contact from "../../screens/contact";
 import Login from "../../screens/login";
 import SignUp from "../../screens/signup";
@@ -15,7 +14,7 @@ import { RightDrawerScreen } from "./drawerNavigator";
 import FoodItem from "../../screens/foodItem";
 import FoodItemDetails from "../../screens/foodItemDetails";
 import Offer from "../../screens/offer";
-import Cart from "../../screens/cart";
+import Cart from "../../screens/shoppingCart";
 import PopularFood from "../../screens/popularFood";
 import GetStarted from "../../screens/getStarted";
 import SignIn from "../../screens/signIn";
@@ -25,12 +24,13 @@ import ForgetPassword from "../../screens/forgetPassword";
 import ChangePassword from "../../screens/changePassword";
 import EditDetails from "../../screens/editDetails";
 import Favourites from "../../screens/favourites";
+import MyOrders from "../../screens/myOrders";
+import OrderDetails from "../../screens/orderDetails";
 
 import { dummyFoodItemData } from "../../../data/data";
 import { addMyProducts } from "../../../reducers/MyProductSlice";
 import { dummyData } from "../../../data/data";
 import { addMyOffer } from "../../../reducers/myOfferSlice";
-
 
 // const Stack = createStackNavigator();
 const Stack = createNativeStackNavigator();
@@ -68,16 +68,25 @@ const ContactStackNavigator = () => {
   );
 }
 
+const MyOrdersStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Orders" component={MyOrders} />
+      <Stack.Screen name="OrderDetails" component={OrderDetails} />
+    </Stack.Navigator>
+  );
+}
+
 const EditStackNavigator = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dummyFoodItemData.map(item => {
-      dispatch(addMyProducts(item))
-    })
-    dummyData.map(item => {
-      dispatch(addMyOffer(item))
-    })
-  }, [])
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dummyFoodItemData.map(item => {
+  //     dispatch(addMyProducts(item))
+  //   })
+  //   dummyData.map(item => {
+  //     dispatch(addMyOffer(item))
+  //   })
+  // }, [])
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Login" component={Login} />
@@ -95,15 +104,15 @@ const EditStackNavigator = () => {
 
 const SignUpStackNavigator = () => {
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dummyFoodItemData.map(item => {
-      dispatch(addMyProducts(item))
-    })
-    dummyData.map(item => {
-      dispatch(addMyOffer(item))
-    })
-  }, [])
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dummyFoodItemData.map(item => {
+  //     dispatch(addMyProducts(item))
+  //   })
+  //   dummyData.map(item => {
+  //     dispatch(addMyOffer(item))
+  //   })
+  // }, [])
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="SignUp" component={SignIn} />
@@ -120,4 +129,4 @@ const SignUpStackNavigator = () => {
 }
 
 // export { MainStackNavigator, ContactStackNavigator };
-export { MainStackNavigator, EditStackNavigator, SignUpStackNavigator, ContactStackNavigator };
+export { MainStackNavigator, EditStackNavigator, SignUpStackNavigator, ContactStackNavigator, MyOrdersStackNavigator };

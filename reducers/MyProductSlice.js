@@ -10,7 +10,7 @@ const MyProductSlice = createSlice({
         increaseQty(state, action) {
             let myindex = -1;
             state.map((item, index) => {
-                if (item.product_code == action.payload) {
+                if (item.product_id == action.payload) {
                     myindex = index;
                 }
             });
@@ -24,7 +24,7 @@ const MyProductSlice = createSlice({
         decreaseQty(state, action) {
             let myindex = -1;
             state.map((item, index) => {
-                if (item.product_code == action.payload) {
+                if (item.product_id == action.payload) {
                     myindex = index;
                 }
             });
@@ -38,7 +38,7 @@ const MyProductSlice = createSlice({
         removeQty(state, action) {
             let myindex = -1;
             state.map((item, index) => {
-                if (item.product_code == action.payload) {
+                if (item.product_id == action.payload) {
                     myindex = index;
                 }
             });
@@ -48,9 +48,14 @@ const MyProductSlice = createSlice({
                 console.log(state[myindex].product_quantity - 1);
             }
             console.log('my products', state[myindex]);
+            // console.log('My Product List: ', state);
+        },
+        clearMyProducts(state, action) {
+            state = [];
+            console.log('My Product List: ', state)
         },
     },
 });
 
-export const { addMyProducts, increaseQty, decreaseQty, removeQty } = MyProductSlice.actions;
+export const { addMyProducts, increaseQty, decreaseQty, removeQty, clearMyProducts } = MyProductSlice.actions;
 export default MyProductSlice.reducer;
